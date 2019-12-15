@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "099d9a0d2ad535cd2a26944b92c0dac0",
+    "revision": "df07f1556d96f4f9378ee41d3e82448c",
     "url": "/Pixelator/index.html"
   },
   {
-    "revision": "f0ddfb6e3532bc970840",
+    "revision": "5d75201e1159eb291854",
     "url": "/Pixelator/static/css/main.ad94b372.chunk.css"
   },
   {
-    "revision": "2fecf95e32006a930dff",
-    "url": "/Pixelator/static/js/2.ab7637cf.chunk.js"
+    "revision": "1e7b924e6339b8075953",
+    "url": "/Pixelator/static/js/2.8d58428d.chunk.js"
   },
   {
     "revision": "e928fe768baa9832b5bc57eae021f30c",
-    "url": "/Pixelator/static/js/2.ab7637cf.chunk.js.LICENSE"
+    "url": "/Pixelator/static/js/2.8d58428d.chunk.js.LICENSE"
   },
   {
-    "revision": "f0ddfb6e3532bc970840",
-    "url": "/Pixelator/static/js/main.3c30bccc.chunk.js"
+    "revision": "5d75201e1159eb291854",
+    "url": "/Pixelator/static/js/main.65f8fd4f.chunk.js"
   },
   {
     "revision": "ee59915fc96d2ff1255e",
