@@ -153,6 +153,3 @@ export function clusterize(matrix, distance, initialVector) {
     }, 100);
     return { centroid, types };
 }
-
-
-
