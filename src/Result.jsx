@@ -1,4 +1,5 @@
 import React from 'react';
+import './Result.css';
 
 export default function Result(props) {
     const { data, width, height} = props;
@@ -12,10 +13,11 @@ export default function Result(props) {
                 <div key={`${i} ${j}`} style={
                     {
                         backgroundColor: `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]}, ${pixel[3]})`,
-                        width: "30px",
-                        height: "30px",
-                        display: "inline-block",
-                        margin: "2px"
+                        "width": `calc(100vw / ${width})`,
+                        "height": `calc(100vw / ${width})`,
+                        "max-width": "60px",
+                        "max-height": "60px",
+                        flex: "0 0 auto",
                     }
                 } />
             )
@@ -23,9 +25,9 @@ export default function Result(props) {
     }
     
     return (
-        <div>
+        <div className="result-container">
             {rows.map(((array, index) => 
-                <div key={index.toString()}>{array}</div>      
+                <div className="result-line" key={index.toString()}>{array}</div>      
             ))}
         </div>
     )

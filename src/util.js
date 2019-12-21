@@ -31,6 +31,46 @@ export function averageData(data) {
     return [sumR, sumG, sumB, sumAlpha].map((value) => value/length);
 }
 
+export function getMedian(data) {
+    // rValue means r in rgba, not related to l-values and r-values
+    const rValues = new Array(256).fill(0);
+    const gValues = new Array(256).fill(0);
+    const bValues = new Array(256).fill(0);
+    const aValues = new Array(256).fill(0);
+    data.forEach((value, index) => {
+        switch (index % 4) {
+            case 0:
+                rValues[value]++;
+                break;
+                
+            case 1:
+                gValues[value]++;
+                break;
+                
+            case 2:
+                bValues[value]++;
+                break;
+                
+            case 3:
+                aValues[value]++;
+                break;
+                
+            default:
+                break;
+        }
+    });
+    return [rValues, gValues, bValues, aValues].map((array) => {
+        let count = 0;
+        for (let i=0; i<256; i++) {
+            count += array[i];
+            if (count >= data.length / 8) {
+                return i;
+            }
+        }
+        return 255;
+    })
+}
+
 export async function getSimplifiedImage(data, imageWidth, imageHeight, width) {
     const tileSize = Math.floor(imageWidth/width);
     const height = Math.floor(imageHeight/tileSize);
@@ -39,8 +79,8 @@ export async function getSimplifiedImage(data, imageWidth, imageHeight, width) {
     for (var i=0; i<height; i++) {
         for (var j=0; j<width; j++) {
             // find out which tile the pixel belongs to
-            for (var k=i*tileSize; k<(i+1)*tileSize; k+=10) {
-                for (var l=j*tileSize; l<(j+1)*tileSize; l+=10) {
+            for (var k=i*tileSize; k<(i+1)*tileSize; k++) {
+                for (var l=j*tileSize; l<(j+1)*tileSize; l++) {
                     if (!newData[i*width+j]) {
                         newData[i*width+j] = [];
                     }
@@ -50,7 +90,7 @@ export async function getSimplifiedImage(data, imageWidth, imageHeight, width) {
             }
         }
     }
-    return newData.map((array) => averageData(array.reduce((a, b) => Array.from(a).concat(Array.from(b)))))
+    return newData.map((array) => getMedian(array.reduce((a, b) => Array.from(a).concat(Array.from(b)))))
                   .reduce((a, b) => a.concat(b));
 }
 
