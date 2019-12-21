@@ -96,7 +96,7 @@ export async function getClusteredImage(data, initialColor) {
     const matrix = [];
     const toRGB = (pixel) => {
         const alpha = pixel[3]/255;
-        return [pixel[0]*alpha, pixel[1]*alpha, pixel[2]*alpha, 255];
+        return alpha ? [pixel[0]*alpha, pixel[1]*alpha, pixel[2]*alpha, 255] : new Array(4).fill(255);
     };
     for (var i=0; i<data.length; i+=4) {
         matrix.push(toRGB(data.slice(i, i+4)));

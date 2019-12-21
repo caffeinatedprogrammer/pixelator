@@ -5,7 +5,11 @@ export default function InputForm({onSubmit}) {
     const [imageWidth, setImageWidth] = useState(0);
     const [imageHeight, setImageHeight] = useState(0);
     const [tileWidthCount, setTileWidthCount] = useState(20);
-    const [initialColor, setInitialColor] = useState({ nextIndex: 4, color: {1: '#000000', 2: '#FFFFFF', 3: '#FFFF00', 4: '#FF0000'}, id: [1,2,3] });
+    const [initialColor, setInitialColor] = useState({
+        nextIndex: 5,
+        color: {1: '#000000', 2: '#FFFFFF', 3: '#FFFF00', 4: '#FF0000'},
+        id: [1, 2, 3, 4]
+    });
     const [imageData, setImageData] = useState();
     const canvasRef = useRef();
     const handleFileInputChange = useCallback((event) => {

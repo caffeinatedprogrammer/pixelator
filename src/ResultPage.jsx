@@ -34,21 +34,23 @@ export default function ResultPage(props) {
     
     return (
         <div className="container">
-            <div className="left" style={{
-                width: `${full}px`,
-                height: `${full}px`,
-                }}
-            >
-                <Result data={imageData} width={width} height={Math.floor(imageHeight/Math.floor(imageWidth/width))} />
-            </div>
-            {Object.keys(mapping).map((color) =>
-                <div>
-                    <div style={{
-                        backgroundColor: color, width: '50px', height: '50px', border: '1px solid black', display: 'inline-block'
-                    }} />
-                    <span>{mapping[color]}</span>
+            <div className="left">
+                <div style={{
+                    width: `${full}px`,
+                    height: `${full}px`,
+                    }}
+                >
+                    <Result data={imageData} width={width} height={Math.floor(imageHeight/Math.floor(imageWidth/width))} />
                 </div>
-            )}
+                {Object.keys(mapping).map((color) =>
+                    <div>
+                        <div style={{
+                            backgroundColor: color, width: '50px', height: '50px', border: '1px solid black', display: 'inline-block'
+                        }} />
+                        <span>{mapping[color]}</span>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
