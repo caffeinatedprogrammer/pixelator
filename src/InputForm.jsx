@@ -5,7 +5,7 @@ export default function InputForm({onSubmit}) {
     const [imageWidth, setImageWidth] = useState(0);
     const [imageHeight, setImageHeight] = useState(0);
     const [tileWidthCount, setTileWidthCount] = useState(20);
-    const [k, setK] = useState(5);
+    const [initialColor, setInitialColor] = useState({ nextIndex: 4, color: {1: '#000000', 2: '#FFFFFF', 3: '#FFFF00', 4: '#FF0000'}, id: [1,2,3] });
     const [imageData, setImageData] = useState();
     const canvasRef = useRef();
     const handleFileInputChange = useCallback((event) => {
@@ -26,31 +26,47 @@ export default function InputForm({onSubmit}) {
     const handleTileWidthCountChange = useCallback((event) => {
         setTileWidthCount(event.target.value);
     }, [setTileWidthCount]);
-    const handleKChange = useCallback((event) => {
-        setK(event.target.value);
-    }, [setK]);
+    const handleColorChange = useCallback((event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setInitialColor((prev) => {
+            const newColor = Object.assign({}, prev.color);
+            newColor[name] = value;
+            return {
+                ...prev, color: newColor,
+            }
+        });
+    }, [setInitialColor]);
+    const handleAddColor = useCallback((event) => {
+        setInitialColor((prev) => ({
+            ...prev,
+            nextIndex: prev.nextIndex + 1,
+            id: [...prev.id, prev.nextIndex],
+            color: {...prev.color, [prev.nextIndex]: '#000000'},
+        }));
+    }, [setInitialColor]);
     const handleSubmit = useCallback((event) => {
         event.preventDefault();
-        onSubmit && onSubmit(imageData, imageWidth, imageHeight, Number(tileWidthCount), k);
-    }, [onSubmit, tileWidthCount, imageData, imageWidth, imageHeight, k]);
+        onSubmit && onSubmit(imageData, imageWidth, imageHeight, Number(tileWidthCount), Object.values(initialColor.color));
+    }, [onSubmit, tileWidthCount, imageData, imageWidth, imageHeight, initialColor]);
     
     return (
         <>
-            <div className="container">
+            <div>
                 <input type="file" onChange={handleFileInputChange} />
+                {"Width:"}
                 <input
                     type="number"
                     onChange={handleTileWidthCountChange}
                     value={tileWidthCount}
                 />
-                <input
-                    type="number"
-                    onChange={handleKChange}
-                    value={k}
-                />
                 <button onClick={handleSubmit}>
                     Submit
                 </button>
+            </div>
+            <div>
+                <button onClick={handleAddColor}>Add color</button>
+                {initialColor.id.map((_id) => <input key={_id.toString()} type="color" value={initialColor.color[_id]} name={_id} onChange={handleColorChange} />)}
             </div>
             <div>
                 <canvas

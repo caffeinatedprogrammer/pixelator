@@ -7,19 +7,29 @@ import { getSimplifiedImage, getResult } from './util';
 export default function ResultPage(props) {
     const location = useLocation();
     const state = location.state;
-    const { data, imageWidth, imageHeight, width, k } = state;
+    const { data, imageWidth, imageHeight, width, initialColor } = state;
     const [imageData, setImageData] = useState();
     
     useEffect(() => {
         const getImage = async () => {
             const image = await getSimplifiedImage(data, imageWidth, imageHeight, width);
-            const clustered = await getResult(image, k);
+            const clustered = await getResult(image, initialColor);
             setImageData(clustered);
         };
         getImage();
-    }, [data, imageWidth, imageHeight, width, k]);
+    }, [data, imageWidth, imageHeight, width, initialColor]);
+    
+    const full = Math.min(window.innerWidth, window.innerHeight) - 80;
     
     return (
-        <Result data={imageData} width={width} height={Math.floor(imageHeight/Math.floor(imageWidth/width))} />
+        <div className="container">
+            <div className="left" style={{
+                width: `${full}px`,
+                height: `${full}px`,
+                }}
+            >
+                <Result data={imageData} width={width} height={Math.floor(imageHeight/Math.floor(imageWidth/width))} />
+            </div>
+        </div>
     );
 }

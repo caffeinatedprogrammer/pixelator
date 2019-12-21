@@ -7,7 +7,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 function App() {
     return (
-        <div className="App">
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <Switch>
                 <Route exact={true} path="/result">
@@ -18,8 +17,7 @@ function App() {
                 </Route>
             </Switch>
         </BrowserRouter>
-    </div>
-  );
+    );
 }
 
 export default App;

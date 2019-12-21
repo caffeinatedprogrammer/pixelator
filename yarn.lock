@@ -6855,13 +6855,6 @@ node-int64@^0.4.0:
   resolved "https://registry.yarnpkg.com/node-int64/-/node-int64-0.4.0.tgz#87a9065cdb355d3182d8f94ce11188b825c68a3b"
   integrity sha1-h6kGXNs1XTGC2PlM4RGIuCXGijs=
 
-node-kmeans@^1.1.9:
-  version "1.1.9"
-  resolved "https://registry.yarnpkg.com/node-kmeans/-/node-kmeans-1.1.9.tgz#ca445d46302f5e76d33f8dfefa895d61f7956ced"
-  integrity sha512-qZiuD4ab4cvsSWQSccWzLb4j1cHlm6wjGiWrbhCPZweVzpfcWBQ2CMqK4YBtJJ3OhK27NkZ1PKiLlZ52Z///cQ==
-  dependencies:
-    underscore "^1.9.1"
-
 node-libs-browser@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/node-libs-browser/-/node-libs-browser-2.2.1.tgz#b64f513d18338625f90346d27b0d235e631f6425"
@@ -10154,11 +10147,6 @@ uglify-js@^3.1.4:
   dependencies:
     commander "~2.20.3"
     source-map "~0.6.1"
-
-underscore@^1.9.1:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.9.1.tgz#06dce34a0e68a7babc29b365b8e74b8925203961"
-  integrity sha512-5/4etnCkd9c8gwgowi5/om/mYO5ajCaOgdzj/oW+0eQV9WxKBDZw5+ycmKmeaTXjInS/W0BzpGLo2xR2aBwZdg==
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
