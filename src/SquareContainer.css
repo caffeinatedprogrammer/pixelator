@@ -1,5 +1,5 @@
 @media (orientation: landscape) {
-    .result-page-container {
+    .square-container {
         height: 100vh;
         max-height: 100vh;
         display: flex;
@@ -7,21 +7,27 @@
         flex-direction: row;
     }
     
-    .result-block-container {
+    .square-block {
+        max-width: calc(100vh - 32px);
         padding: 16px;
-        flex: 0 0 calc(100vh - 32px);
+        flex: 1 1 calc(100vh - 32px);
     }
 }
 
 @media (orientation: portrait) {
-    .result-page-container {
+    .square-container {
         display: flex;
         align-items: stretch;
         flex-direction: column;
     }
     
-    .result-block-container {
+    .square-block {
+        max-height: calc(100vw - 32px);
         padding: 16px;
-        flex: 0 0 calc(100vw - 32px);
+        flex: 1 1 calc(100vw - 32px);
     }
+}
+
+.square-other {
+    flex: 0 0 auto;
 }

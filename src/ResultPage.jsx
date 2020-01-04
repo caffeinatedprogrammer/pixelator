@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
+import SquareContainer from './SquareContainer';
+import Button from './Button';
 import Result from './Result';
+import ResultGuide from './ResultGuide';
 import { getSimplifiedImage, getResult } from './util';
-import "./ResultPage.css";
 
 export default function ResultPage(props) {
     const location = useLocation();
+    const history = useHistory();
     const state = location.state;
     const { data, imageWidth, imageHeight, width, initialColor } = state;
     const [imageData, setImageData] = useState();
@@ -33,26 +36,22 @@ export default function ResultPage(props) {
     }
     
     return (
-        <div className="result-page-container">
-            <div className="result-block-container">
-                <Result
-                    data={imageData}
-                    width={width}
-                    height={Math.floor(imageHeight/Math.floor(imageWidth/width))}
-                />
-            </div>
-            {Object.keys(mapping).map((color) =>
-                <div>
-                    <div style={{
-                        backgroundColor: color,
-                        width: '50px',
-                        height: '50px',
-                        border: '1px solid black',
-                        display: 'inline-block'
-                    }} />
-                    <span>{mapping[color]}</span>
-                </div>
-            )}
-        </div>
+        <>
+            <SquareContainer
+                square={
+                    <Result
+                        data={imageData}
+                        width={width}
+                        height={Math.floor(imageHeight/Math.floor(imageWidth/width))}
+                    />
+                }
+                other={
+                    <>
+                        <Button onClick={history.goBack}>Go Back</Button>
+                        <ResultGuide mapping={mapping} />
+                    </>
+                }
+            />
+        </>
     );
 }

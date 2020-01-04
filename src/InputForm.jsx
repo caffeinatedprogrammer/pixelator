@@ -1,5 +1,8 @@
 import React, { useCallback, useState, useRef } from "react";
 import "./InputPage.css";
+import Button from "./Button";
+import SquareContainer from "./SquareContainer";
+import SelectFilePlaceholder from "./SelectFilePlaceholder";
 
 export default function InputForm({onSubmit}) {
     const [imageWidth, setImageWidth] = useState(0);
@@ -12,6 +15,11 @@ export default function InputForm({onSubmit}) {
     });
     const [imageData, setImageData] = useState();
     const canvasRef = useRef();
+    const fileInputRef = useRef();
+    const handleFileButtonClick = useCallback((event) => {
+        event.preventDefault();
+        fileInputRef.current.click();
+    }, [fileInputRef]);
     const handleFileInputChange = useCallback((event) => {
         const reader = new FileReader();
         reader.onload = () => image.src = reader.result;
@@ -31,6 +39,7 @@ export default function InputForm({onSubmit}) {
         setTileWidthCount(event.target.value);
     }, [setTileWidthCount]);
     const handleColorChange = useCallback((event) => {
+        event.preventDefault();
         const name = event.target.name;
         const value = event.target.value;
         setInitialColor((prev) => {
@@ -42,6 +51,7 @@ export default function InputForm({onSubmit}) {
         });
     }, [setInitialColor]);
     const handleAddColor = useCallback((event) => {
+        event.preventDefault();
         setInitialColor((prev) => ({
             ...prev,
             nextIndex: prev.nextIndex + 1,
@@ -55,30 +65,43 @@ export default function InputForm({onSubmit}) {
     }, [onSubmit, tileWidthCount, imageData, imageWidth, imageHeight, initialColor]);
     
     return (
-        <>
-            <div>
-                <input type="file" onChange={handleFileInputChange} />
-                {"Width:"}
-                <input
-                    type="number"
-                    onChange={handleTileWidthCountChange}
-                    value={tileWidthCount}
-                />
-                <button onClick={handleSubmit}>
+        <SquareContainer
+            other={<form className="form" onSubmit={handleSubmit}>
+                <input className="hidden" ref={fileInputRef} type="file" onChange={handleFileInputChange} />
+                <Button onClick={handleFileButtonClick}>Choose an image</Button>
+                    <div>
+                    <label>Width:</label>
+                    <input
+                        type="number"
+                        onChange={handleTileWidthCountChange}
+                        value={tileWidthCount}
+                    />
+                </div>
+                <div>
+                    <Button onClick={handleAddColor}>Add color</Button>
+                    {initialColor.id.map((_id) =>
+                        <input
+                            key={_id.toString()}
+                            type="color"
+                            value={initialColor.color[_id]}
+                            name={_id}
+                            onChange={handleColorChange}
+                        />
+                    )}
+                </div>
+                <Button disabled={!imageData} type="submit">
                     Submit
-                </button>
-            </div>
-            <div>
-                <button onClick={handleAddColor}>Add color</button>
-                {initialColor.id.map((_id) => <input key={_id.toString()} type="color" value={initialColor.color[_id]} name={_id} onChange={handleColorChange} />)}
-            </div>
-            <div>
-                <canvas
-                    ref={canvasRef}
-                    width={imageWidth.toString()}
-                    height={imageHeight.toString()}
-                />
-            </div>
-        </>    
+                </Button>
+            </form>}
+            square={
+                <div className="overflow-scroll full">
+                    <canvas
+                        ref={canvasRef}
+                        width={imageWidth.toString()}
+                        height={imageHeight.toString()}
+                    />
+                </div>
+            }
+        />    
     );
 }
