@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import InputForm from "./InputForm";
 import { useHistory } from 'react-router-dom';
 
@@ -22,6 +22,9 @@ export default function InputPage(props) {
             },
         });
     }, [history, convert]);
+    useEffect(() => {
+        document.title = "Pixelator";
+    }, []);
     
     return (
         <div className="container">

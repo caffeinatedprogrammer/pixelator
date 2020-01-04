@@ -15,6 +15,9 @@ export default function ResultPage(props) {
     const [imageData, setImageData] = useState();
     
     useEffect(() => {
+        document.title = "Pixelator | Result";
+    }, []);
+    useEffect(() => {
         const getImage = async () => {
             const image = await getSimplifiedImage(data, imageWidth, imageHeight, width);
             const clustered = await getResult(image, initialColor);
