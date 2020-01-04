@@ -15,6 +15,7 @@ export default function Result(props) {
                     {
                         backgroundColor: `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]}, ${pixel[3]})`,
                         width: `calc(100% / ${width})`,
+                        paddingBottom: `calc(100% / ${width})`,
                         flex: "0 0 auto",
                     }
                 } />
@@ -25,12 +26,7 @@ export default function Result(props) {
     return (
         <div className="result-container">
             {rows.map(((array, index) => 
-                <div className="result-line" style={
-                    {
-                        width: "100%",
-                        height: `calc(100% / ${width})`,
-                    }
-                } key={index.toString()}>{array}</div>      
+                <div className="result-line" key={index.toString()}>{array}</div>      
             ))}
         </div>
     )

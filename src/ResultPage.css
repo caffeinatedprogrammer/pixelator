@@ -1,0 +1,27 @@
+@media (orientation: landscape) {
+    .result-page-container {
+        height: 100vh;
+        max-height: 100vh;
+        display: flex;
+        align-items: stretch;
+        flex-direction: row;
+    }
+    
+    .result-block-container {
+        padding: 16px;
+        flex: 0 0 calc(100vh - 32px);
+    }
+}
+
+@media (orientation: portrait) {
+    .result-page-container {
+        display: flex;
+        align-items: stretch;
+        flex-direction: column;
+    }
+    
+    .result-block-container {
+        padding: 16px;
+        flex: 0 0 calc(100vw - 32px);
+    }
+}

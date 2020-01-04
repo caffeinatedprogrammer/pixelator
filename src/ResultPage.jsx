@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import Result from './Result';
 import { getSimplifiedImage, getResult } from './util';
+import "./ResultPage.css";
 
 export default function ResultPage(props) {
     const location = useLocation();
@@ -19,7 +20,6 @@ export default function ResultPage(props) {
         getImage();
     }, [data, imageWidth, imageHeight, width, initialColor]);
     
-    const full = Math.min(window.innerWidth, window.innerHeight) - 80;
     const mapping = {};
     if (imageData) {
         for (var i=0; i<imageData.length; i+=4) {
@@ -33,24 +33,26 @@ export default function ResultPage(props) {
     }
     
     return (
-        <div className="container">
-            <div className="left">
-                <div style={{
-                    width: `${full}px`,
-                    height: `${full}px`,
-                    }}
-                >
-                    <Result data={imageData} width={width} height={Math.floor(imageHeight/Math.floor(imageWidth/width))} />
-                </div>
-                {Object.keys(mapping).map((color) =>
-                    <div>
-                        <div style={{
-                            backgroundColor: color, width: '50px', height: '50px', border: '1px solid black', display: 'inline-block'
-                        }} />
-                        <span>{mapping[color]}</span>
-                    </div>
-                )}
+        <div className="result-page-container">
+            <div className="result-block-container">
+                <Result
+                    data={imageData}
+                    width={width}
+                    height={Math.floor(imageHeight/Math.floor(imageWidth/width))}
+                />
             </div>
+            {Object.keys(mapping).map((color) =>
+                <div>
+                    <div style={{
+                        backgroundColor: color,
+                        width: '50px',
+                        height: '50px',
+                        border: '1px solid black',
+                        display: 'inline-block'
+                    }} />
+                    <span>{mapping[color]}</span>
+                </div>
+            )}
         </div>
     );
 }
