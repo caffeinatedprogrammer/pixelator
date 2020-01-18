@@ -46,7 +46,6 @@ export function getMedian(data, edges) {
             }
         }
         if (currentCount > 0.03 * totalCount) {
-            console.dir({currentCount, totalCount});
             return edge;
         }
     }
