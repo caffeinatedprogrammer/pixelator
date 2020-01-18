@@ -169,13 +169,13 @@ export function clusterize(matrix, distance, initialVector, iterationCount) {
             newCentroidSum[type] = newCentroidSum[type].map((value, index) => value + matrix[i][index]);
             newCentroidCount[type]++;
         }
-        centroid = newCentroidSum.map((value, type) => value.map((color) => {
+        centroid = newCentroidSum.map((value, type) => {
             if (newCentroidCount[type] !== 0) {
-                return color / newCentroidCount[type];
+                return value.map((color) => color / newCentroidCount[type]);
             } else {
                 return centroid[type];
             }
-        }));
+        });
     }, iterationCount);
     return { centroid, types };
 }
