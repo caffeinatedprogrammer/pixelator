@@ -121,6 +121,11 @@ export default function InputForm({onSubmit}) {
     return (
         <SquareContainer
             other={<form className="form" onSubmit={handleSubmit}>
+                <h3>Instructions:</h3>
+                <span>Select an image with few colors and sufficiently wide margin.</span>
+                <span>Choose the main colors in the image.</span>
+                <span>Choose the color of the edge if necessary.</span>
+                <span>Increase sample distance if the calculation is too slow.</span>
                 <input className="hidden" ref={fileInputRef} type="file" onChange={handleFileInputChange} />
                 <Button onClick={handleFileButtonClick}>Choose an image</Button>
                 <div>
