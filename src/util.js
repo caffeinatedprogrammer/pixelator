@@ -29,12 +29,28 @@ export function averageData(data) {
     return [sumR, sumG, sumB, sumAlpha].map((value) => value/length);
 }
 
-export function getMedian(data) {
+export function getMedian(data, edges) {
     // rValue means r in rgba, not related to l-values and r-values
     const rValues = new Array(256).fill(0);
     const gValues = new Array(256).fill(0);
     const bValues = new Array(256).fill(0);
     const aValues = new Array(256).fill(0);
+    
+    for (const edge of edges) {
+        const totalCount = data.length / 4;
+        let currentCount = 0;
+        for (let i=0; i<data.length; i+=4) {
+            const pixel = data.slice(i, i+4);
+            if (euclideanDistance(pixel, edge) < 30) {
+                currentCount++;
+            }
+        }
+        if (currentCount > 0.03 * totalCount) {
+            console.dir({currentCount, totalCount});
+            return edge;
+        }
+    }
+    
     data.forEach((value, index) => {
         switch (index % 4) {
             case 0:
@@ -57,6 +73,7 @@ export function getMedian(data) {
                 break;
         }
     });
+    
     return [rValues, gValues, bValues, aValues].map((array) => {
         let count = 0;
         for (let i=0; i<256; i++) {
@@ -69,7 +86,7 @@ export function getMedian(data) {
     })
 }
 
-export async function getSimplifiedImage(data, imageWidth, imageHeight, width, sampleDistance) {
+export async function getSimplifiedImage(data, imageWidth, imageHeight, width, sampleDistance, initialEdge) {
     const tileSize = Math.floor(imageWidth/width);
     const height = Math.floor(imageHeight/tileSize);
     const newData = new Array(width*height);
@@ -88,26 +105,30 @@ export async function getSimplifiedImage(data, imageWidth, imageHeight, width, s
             }
         }
     }
-    return newData.map((array) => getMedian(array.reduce((a, b) => Array.from(a).concat(Array.from(b)))))
+    return newData.map((array) => getMedian(array.reduce((a, b) => Array.from(a).concat(Array.from(b))), initialEdge))
                   .reduce((a, b) => a.concat(b));
 }
 
+function euclideanDistance(x, y) {
+    let sum = 0;
+    for (let i=0; i<3; i++) {
+        sum += (x[i] - y[i]) * (x[i] - y[i]);
+    }
+    return sum;
+}
+    
+export function toRGB(pixel) {
+    const alpha = pixel[3]/255;
+    return alpha ? [pixel[0]*alpha, pixel[1]*alpha, pixel[2]*alpha, 255] : new Array(4).fill(255);
+};
+
 export async function getClusteredImage(data, initialColor, iterationCount) {
     const matrix = [];
-    const toRGB = (pixel) => {
-        const alpha = pixel[3]/255;
-        return alpha ? [pixel[0]*alpha, pixel[1]*alpha, pixel[2]*alpha, 255] : new Array(4).fill(255);
-    };
+    
     for (var i=0; i<data.length; i+=4) {
         matrix.push(toRGB(data.slice(i, i+4)));
     }
-    return new Promise((resolve) => resolve(clusterize(matrix, (x, y) => {
-        let sum = 0;
-        for (let i=0; i<3; i++) {
-            sum += (x[i] - y[i]) * (x[i] - y[i]);
-        }
-        return sum;
-    }, initialColor, iterationCount)));
+    return new Promise((resolve) => resolve(clusterize(matrix, euclideanDistance, initialColor, iterationCount)));
 }
 
 export async function getResult(data, initialColor, iterationCount) {

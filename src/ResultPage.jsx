@@ -18,6 +18,7 @@ export default function ResultPage(props) {
         imageHeight,
         width,
         initialColor,
+        initialEdge,
         iterationCount,
         sampleDistance,
     } = state;
@@ -26,7 +27,7 @@ export default function ResultPage(props) {
     useTitle("Pixelator | Result");
     useEffect(() => {
         const getImage = async () => {
-            const image = await getSimplifiedImage(data, imageWidth, imageHeight, width, sampleDistance);
+            const image = await getSimplifiedImage(data, imageWidth, imageHeight, width, sampleDistance, initialEdge);
             const clustered = await getResult(image, initialColor, iterationCount);
             setImageData(clustered);
         };
@@ -37,6 +38,7 @@ export default function ResultPage(props) {
         imageHeight,
         width,
         initialColor,
+        initialEdge,
         iterationCount,
         sampleDistance
     ]);

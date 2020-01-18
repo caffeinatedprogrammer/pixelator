@@ -12,6 +12,11 @@ export default function InputForm({onSubmit}) {
         color: {1: '#000000', 2: '#FFFFFF', 3: '#FFFF00', 4: '#FF0000'},
         id: [1, 2, 3, 4]
     });
+    const [initialEdge, setInitialEdge] = useState({
+        nextIndex: 2,
+        edge: {1: '#000000'},
+        id: [1]
+    });
     const [imageData, setImageData] = useState();
     const [iterationCount, setIterationCount] = useState(50);
     const [sampleDistance, setSampleDistance] = useState(10);
@@ -60,6 +65,27 @@ export default function InputForm({onSubmit}) {
             color: {...prev.color, [prev.nextIndex]: '#000000'},
         }));
     }, [setInitialColor]);
+    const handleEdgeChange = useCallback((event) => {
+        event.preventDefault();
+        const name = event.target.name;
+        const value = event.target.value;
+        setInitialEdge((prev) => {
+            const newEdge = Object.assign({}, prev.edge);
+            newEdge[name] = value;
+            return {
+                ...prev, edge: newEdge,
+            }
+        });
+    }, [setInitialEdge]);
+    const handleAddEdge = useCallback((event) => {
+        event.preventDefault();
+        setInitialEdge((prev) => ({
+            ...prev,
+            nextIndex: prev.nextIndex + 1,
+            id: [...prev.id, prev.nextIndex],
+            edge: {...prev.edge, [prev.nextIndex]: '#000000'},
+        }));
+    }, [setInitialEdge]);
     const handleIterationCountChange = useCallback((event) => {
         event.preventDefault();
         setIterationCount(event.target.value);
@@ -76,8 +102,9 @@ export default function InputForm({onSubmit}) {
             imageHeight,
             Number(tileWidthCount),
             Object.values(initialColor.color),
-            iterationCount,
-            sampleDistance
+            Object.values(initialEdge.edge),
+            Number(iterationCount),
+            Number(sampleDistance),
         );
     }, [
         onSubmit,
@@ -86,6 +113,7 @@ export default function InputForm({onSubmit}) {
         imageWidth,
         imageHeight,
         initialColor,
+        initialEdge,
         iterationCount,
         sampleDistance
     ]);
@@ -123,11 +151,23 @@ export default function InputForm({onSubmit}) {
                     <Button onClick={handleAddColor}>Add color</Button>
                     {initialColor.id.map((_id) =>
                         <input
-                            key={_id.toString()}
+                            key={`color_${_id}`}
                             type="color"
                             value={initialColor.color[_id]}
                             name={_id}
                             onChange={handleColorChange}
+                        />
+                    )}
+                </div>
+                <div>
+                    <Button onClick={handleAddEdge}>Add Edge</Button>
+                    {initialEdge.id.map((_id) =>
+                        <input
+                            key={`edge_${_id}`}
+                            type="color"
+                            value={initialEdge.edge[_id]}
+                            name={_id}
+                            onChange={handleEdgeChange}
                         />
                     )}
                 </div>
