@@ -2,7 +2,6 @@ import React, { useCallback, useState, useRef } from "react";
 import "./InputPage.css";
 import Button from "./Button";
 import SquareContainer from "./SquareContainer";
-import SelectFilePlaceholder from "./SelectFilePlaceholder";
 
 export default function InputForm({onSubmit}) {
     const [imageWidth, setImageWidth] = useState(0);
@@ -14,6 +13,8 @@ export default function InputForm({onSubmit}) {
         id: [1, 2, 3, 4]
     });
     const [imageData, setImageData] = useState();
+    const [iterationCount, setIterationCount] = useState(50);
+    const [sampleDistance, setSampleDistance] = useState(10);
     const canvasRef = useRef();
     const fileInputRef = useRef();
     const handleFileButtonClick = useCallback((event) => {
@@ -59,22 +60,63 @@ export default function InputForm({onSubmit}) {
             color: {...prev.color, [prev.nextIndex]: '#000000'},
         }));
     }, [setInitialColor]);
+    const handleIterationCountChange = useCallback((event) => {
+        event.preventDefault();
+        setIterationCount(event.target.value);
+    }, []);
+    const handleSampleDistanceChange = useCallback((event) => {
+        event.preventDefault();
+        setSampleDistance(event.target.value);
+    }, []);
     const handleSubmit = useCallback((event) => {
         event.preventDefault();
-        onSubmit && onSubmit(imageData, imageWidth, imageHeight, Number(tileWidthCount), Object.values(initialColor.color));
-    }, [onSubmit, tileWidthCount, imageData, imageWidth, imageHeight, initialColor]);
+        onSubmit && onSubmit(
+            imageData,
+            imageWidth,
+            imageHeight,
+            Number(tileWidthCount),
+            Object.values(initialColor.color),
+            iterationCount,
+            sampleDistance
+        );
+    }, [
+        onSubmit,
+        tileWidthCount,
+        imageData,
+        imageWidth,
+        imageHeight,
+        initialColor,
+        iterationCount,
+        sampleDistance
+    ]);
     
     return (
         <SquareContainer
             other={<form className="form" onSubmit={handleSubmit}>
                 <input className="hidden" ref={fileInputRef} type="file" onChange={handleFileInputChange} />
                 <Button onClick={handleFileButtonClick}>Choose an image</Button>
-                    <div>
+                <div>
                     <label>Width:</label>
                     <input
                         type="number"
                         onChange={handleTileWidthCountChange}
                         value={tileWidthCount}
+                    />
+                </div>
+                <div>
+                    <label>Iteration Count:</label>
+                    <input
+                        type="number"
+                        onChange={handleIterationCountChange}
+                        value={iterationCount}
+                    />
+                </div>
+                <div>
+                    <label>Sample Distance:</label>
+                    <input
+                        type="number"
+                        onChange={handleSampleDistanceChange}
+                        value={sampleDistance}
                     />
                 </div>
                 <div>

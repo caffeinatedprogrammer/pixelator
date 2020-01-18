@@ -6,25 +6,40 @@ import Button from './Button';
 import Result from './Result';
 import ResultGuide from './ResultGuide';
 import { getSimplifiedImage, getResult } from './util';
+import { useTitle } from "./hooks";
 
 export default function ResultPage(props) {
     const location = useLocation();
     const history = useHistory();
     const state = location.state;
-    const { data, imageWidth, imageHeight, width, initialColor } = state;
+    const {
+        data,
+        imageWidth,
+        imageHeight,
+        width,
+        initialColor,
+        iterationCount,
+        sampleDistance,
+    } = state;
     const [imageData, setImageData] = useState();
     
-    useEffect(() => {
-        document.title = "Pixelator | Result";
-    }, []);
+    useTitle("Pixelator | Result");
     useEffect(() => {
         const getImage = async () => {
-            const image = await getSimplifiedImage(data, imageWidth, imageHeight, width);
-            const clustered = await getResult(image, initialColor);
+            const image = await getSimplifiedImage(data, imageWidth, imageHeight, width, sampleDistance);
+            const clustered = await getResult(image, initialColor, iterationCount);
             setImageData(clustered);
         };
         getImage();
-    }, [data, imageWidth, imageHeight, width, initialColor]);
+    }, [
+        data,
+        imageWidth,
+        imageHeight,
+        width,
+        initialColor,
+        iterationCount,
+        sampleDistance
+    ]);
     
     const mapping = {};
     if (imageData) {

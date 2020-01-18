@@ -69,7 +69,7 @@ export function getMedian(data) {
     })
 }
 
-export async function getSimplifiedImage(data, imageWidth, imageHeight, width) {
+export async function getSimplifiedImage(data, imageWidth, imageHeight, width, sampleDistance) {
     const tileSize = Math.floor(imageWidth/width);
     const height = Math.floor(imageHeight/tileSize);
     const newData = new Array(width*height);
@@ -77,8 +77,8 @@ export async function getSimplifiedImage(data, imageWidth, imageHeight, width) {
     for (var i=0; i<height; i++) {
         for (var j=0; j<width; j++) {
             // find out which tile the pixel belongs to
-            for (var k=i*tileSize; k<(i+1)*tileSize; k++) {
-                for (var l=j*tileSize; l<(j+1)*tileSize; l++) {
+            for (var k=i*tileSize; k<(i+1)*tileSize; k+=sampleDistance) {
+                for (var l=j*tileSize; l<(j+1)*tileSize; l+=sampleDistance) {
                     if (!newData[i*width+j]) {
                         newData[i*width+j] = [];
                     }
@@ -92,7 +92,7 @@ export async function getSimplifiedImage(data, imageWidth, imageHeight, width) {
                   .reduce((a, b) => a.concat(b));
 }
 
-export async function getClusteredImage(data, initialColor) {
+export async function getClusteredImage(data, initialColor, iterationCount) {
     const matrix = [];
     const toRGB = (pixel) => {
         const alpha = pixel[3]/255;
@@ -107,11 +107,11 @@ export async function getClusteredImage(data, initialColor) {
             sum += (x[i] - y[i]) * (x[i] - y[i]);
         }
         return sum;
-    }, initialColor)));
+    }, initialColor, iterationCount)));
 }
 
-export async function getResult(data, initialColor) {
-    const { centroid, types } = await getClusteredImage(data, initialColor);
+export async function getResult(data, initialColor, iterationCount) {
+    const { centroid, types } = await getClusteredImage(data, initialColor, iterationCount);
     for (const index in types) {
         data.splice(index*4, 4, ...centroid[types[index]]);
     }
@@ -124,7 +124,7 @@ const repeat = (fn, times) => {
     }
 };
 
-export function clusterize(matrix, distance, initialVector) {
+export function clusterize(matrix, distance, initialVector, iterationCount) {
     let centroid = initialVector;
     const types = matrix.map((color, index) => 0);
     const findType = (item, centroid, distance) => {
@@ -150,6 +150,6 @@ export function clusterize(matrix, distance, initialVector) {
             newCentroidCount[type]++;
         }
         centroid = newCentroidSum.map((value, type) => value.map((color) => color / Math.max(1, newCentroidCount[type])));
-    }, 100);
+    }, iterationCount);
     return { centroid, types };
 }

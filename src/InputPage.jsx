@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import InputForm from "./InputForm";
+import { useTitle } from "./hooks";
 import { useHistory } from 'react-router-dom';
 
 export default function InputPage(props) {
@@ -14,17 +15,15 @@ export default function InputPage(props) {
             ];
         });
     }, []);
-    const onSubmit = useCallback((data, imageWidth, imageHeight, width, initialColor) => {
+    const onSubmit = useCallback((data, imageWidth, imageHeight, width, initialColor, iterationCount, sampleDistance) => {
         history.push({
             pathname: "/result",
             state: {
-                data, imageWidth, imageHeight, width, initialColor: convert(initialColor)
+                data, imageWidth, imageHeight, width, initialColor: convert(initialColor), iterationCount, sampleDistance,
             },
         });
     }, [history, convert]);
-    useEffect(() => {
-        document.title = "Pixelator";
-    }, []);
+    useTitle("Pixelator");
     
     return (
         <div className="container">
