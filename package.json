@@ -1,7 +1,7 @@
 {
   "name": "pixelator",
   "version": "0.1.0",
-  "homepage": "https://caffeinatedprogrammer.github.io./Pixelator",
+  "homepage": "https://caffeinatedprogrammer.github.io./pixelator",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
