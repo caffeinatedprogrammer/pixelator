@@ -13,13 +13,13 @@ export default function InputForm({onSubmit}) {
         id: [1, 2, 3, 4]
     });
     const [initialEdge, setInitialEdge] = useState({
-        nextIndex: 2,
-        edge: {1: '#000000'},
-        id: [1]
+        nextIndex: 1,
+        edge: {},
+        id: []
     });
     const [imageData, setImageData] = useState();
     const [iterationCount, setIterationCount] = useState(50);
-    const [sampleDistance, setSampleDistance] = useState(10);
+    const [sampleDistance, setSampleDistance] = useState(1);
     const canvasRef = useRef();
     const fileInputRef = useRef();
     const handleFileButtonClick = useCallback((event) => {
