@@ -1,15 +1,13 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import SquareContainer from './SquareContainer';
-import Button from './Button';
 import Result from './Result';
 import ResultGuide from './ResultGuide';
 import { getSimplifiedImage, getResult } from './util';
 import { useTitle, useSelector } from "./hooks";
 
 export default function ResultPage(props) {
-    const history = useHistory();
     const convert = useCallback((initialColor) => {
         return initialColor.map((color) => {
             return [

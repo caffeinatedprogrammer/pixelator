@@ -21,7 +21,7 @@ export default function InputForm({onSubmit}) {
         nextIndex: defaultInitialColor.length,
         color: defaultInitialColor.map((value, index) => ({[index]: value})).reduce((a, b) => Object.assign({}, a, b), {}),
         id: new Array(defaultInitialColor.length).fill(0).map((value, index) => index),
-    });
+    });console.dir(initialColor);
     const [initialEdge, setInitialEdge] = useState({
         nextIndex: defaultInitialEdge.length,
         edge: defaultInitialEdge.map((value, index) => ({[index]: value})).reduce((a, b) => Object.assign({}, a, b), {}),
@@ -81,7 +81,7 @@ export default function InputForm({onSubmit}) {
             const prevId = prev.id;
             const lastId = prevId.pop();
             const prevColor = prev.color;
-            delete prevColor.lastId;
+            delete prevColor[lastId];
             return {
                 ...prev,
                 color: prevColor,
@@ -116,7 +116,7 @@ export default function InputForm({onSubmit}) {
             const prevId = prev.id;
             const lastId = prevId.pop();
             const prevEdge = prev.edge;
-            delete prevEdge.lastId;
+            delete prevEdge[lastId];
             return {
                 ...prev,
                 edge: prevEdge,
