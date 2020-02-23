@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "953a0e446ded1e68848cbef9349a2c54",
+    "revision": "38e5be0c7a72e60d9f0e254726626550",
     "url": "/pixelator/index.html"
   },
   {
