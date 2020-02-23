@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/pixelator/static/css/main.51c5da4c.chunk.css",
-    "main.js": "/pixelator/static/js/main.7ac96f0c.chunk.js",
-    "main.js.map": "/pixelator/static/js/main.7ac96f0c.chunk.js.map",
+    "main.js": "/pixelator/static/js/main.9e35e136.chunk.js",
+    "main.js.map": "/pixelator/static/js/main.9e35e136.chunk.js.map",
     "runtime-main.js": "/pixelator/static/js/runtime-main.b0d9f35b.js",
     "runtime-main.js.map": "/pixelator/static/js/runtime-main.b0d9f35b.js.map",
     "static/js/2.223be466.chunk.js": "/pixelator/static/js/2.223be466.chunk.js",
     "static/js/2.223be466.chunk.js.map": "/pixelator/static/js/2.223be466.chunk.js.map",
     "index.html": "/pixelator/index.html",
-    "precache-manifest.9c524121f9de50f201e347ec2fcf6670.js": "/pixelator/precache-manifest.9c524121f9de50f201e347ec2fcf6670.js",
+    "precache-manifest.52ccadb1c0f665e3fe2d0d101ba2cae3.js": "/pixelator/precache-manifest.52ccadb1c0f665e3fe2d0d101ba2cae3.js",
     "service-worker.js": "/pixelator/service-worker.js",
     "static/css/main.51c5da4c.chunk.css.map": "/pixelator/static/css/main.51c5da4c.chunk.css.map",
     "static/js/2.223be466.chunk.js.LICENSE": "/pixelator/static/js/2.223be466.chunk.js.LICENSE"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.b0d9f35b.js",
     "static/js/2.223be466.chunk.js",
     "static/css/main.51c5da4c.chunk.css",
-    "static/js/main.7ac96f0c.chunk.js"
+    "static/js/main.9e35e136.chunk.js"
   ]
 }
