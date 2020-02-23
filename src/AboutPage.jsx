@@ -1,6 +1,10 @@
 import React from "react";
 
+import { useTitle } from './hooks';
+
 export default function AboutPage() {
+    useTitle('Pixelator | About');
+    
     return (
         <div className="normal-page-padding">
             <div className="dummy-height" />
