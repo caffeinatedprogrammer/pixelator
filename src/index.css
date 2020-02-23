@@ -5,6 +5,8 @@ body {
 }
 
 body, p, span, label, button, input {
+    margin: 0px;
+    padding: 0px;
     font-family: "Fira Sans";
     font-size: 16px;
 }
@@ -34,6 +36,8 @@ body, p, span, label, button, input {
 .flex-container {
     display: flex;
     align-items: center;
+    margin: 8px;
+    padding: 0px;
     width: 100%;
 }
 

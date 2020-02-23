@@ -69,10 +69,24 @@ export default function InputForm({onSubmit}) {
         event.preventDefault();
         setInitialColor((prev) => ({
             ...prev,
-            nextIndex: prev.nextIndex,
+            nextIndex: prev.nextIndex +1,
             id: [...prev.id, prev.nextIndex],
             color: {...prev.color, [prev.nextIndex]: '#000000'},
         }));
+    }, [setInitialColor]);
+    const handleRemoveColor = useCallback((event) => {
+        event.preventDefault();
+        setInitialColor((prev) => {
+            const prevId = prev.id;
+            const lastId = prevId.pop();
+            const prevColor = prev.color;
+            delete prevColor.lastId;
+            return {
+                ...prev,
+                color: prevColor,
+                id: prevId,
+            };
+        });
     }, [setInitialColor]);
     const handleEdgeChange = useCallback((event) => {
         event.preventDefault();
@@ -90,10 +104,24 @@ export default function InputForm({onSubmit}) {
         event.preventDefault();
         setInitialEdge((prev) => ({
             ...prev,
-            nextIndex: prev.nextIndex,
+            nextIndex: prev.nextIndex +1,
             id: [...prev.id, prev.nextIndex],
             edge: {...prev.edge, [prev.nextIndex]: '#000000'},
         }));
+    }, [setInitialEdge]);
+    const handleRemoveEdge = useCallback((event) => {
+        event.preventDefault();
+        setInitialEdge((prev) => {
+            const prevId = prev.id;
+            const lastId = prevId.pop();
+            const prevEdge = prev.edge;
+            delete prevEdge.lastId;
+            return {
+                ...prev,
+                edge: prevEdge,
+                id: prevId,
+            };
+        });
     }, [setInitialEdge]);
     const handleIterationCountChange = useCallback((event) => {
         event.preventDefault();
@@ -160,7 +188,12 @@ export default function InputForm({onSubmit}) {
                         value={sampleDistance}
                     />
                 </SettingItem>
-                <SettingItem name="Color" end={<Button onClick={handleAddColor}>+</Button>}>
+                <SettingItem name="Color" end={
+                    <>
+                        <Button onClick={handleAddColor}>+</Button>
+                        <Button onClick={handleRemoveColor}>-</Button>
+                    </>
+                }>
                     {initialColor.id.map((_id) =>
                         <input
                             key={`color_${_id}`}
