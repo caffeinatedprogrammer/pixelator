@@ -67,11 +67,14 @@ export default function ResultPage(props) {
         data ? 
             <SquareContainer
                 square={
-                    <Result
-                        data={imageData}
-                        width={width}
-                        height={Math.floor(imageHeight/Math.floor(imageWidth/width))}
-                    />
+                    <>
+                        <div className="dummy-height" />
+                        <Result
+                            data={imageData}
+                            width={width}
+                            height={Math.floor(imageHeight/Math.floor(imageWidth/width))}
+                        />
+                    </>
                 }
                 other={
                     <div className="normal-page-padding">

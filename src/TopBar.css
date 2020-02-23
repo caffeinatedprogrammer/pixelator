@@ -5,9 +5,10 @@
     align-items: baseline;
     top: 0;
     width: 100vw;
-    height: 30px;
+    height: 65px;
     z-index: 1;
     background-color: white;
+    box-sizing: border-box;
     padding: 16px;
 }
 

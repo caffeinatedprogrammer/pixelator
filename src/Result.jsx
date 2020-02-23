@@ -24,8 +24,7 @@ export default function Result(props) {
     }
     
     return (
-        <div className="result-container">
-            <div className="dummy-height" />
+        <div>
             {rows.map(((array, index) => 
                 <div className="result-line" key={index.toString()}>{array}</div>      
             ))}

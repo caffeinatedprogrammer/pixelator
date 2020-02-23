@@ -242,6 +242,7 @@ export default function InputForm({onSubmit}) {
             </form>}
             square={
                 <div className="overflow-scroll full">
+                    <div className="dummy-height" />
                     <canvas
                         ref={canvasRef}
                         width={imageWidth.toString()}
