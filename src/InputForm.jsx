@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from "react";
+import React, { useEffect, useCallback, useState, useRef } from "react";
 import "./InputPage.css";
 import Button from "./Button";
 import RoundedButton from "./RoundedButton";
@@ -8,14 +8,17 @@ import { useSelector } from './hooks';
 
 export default function InputForm({onSubmit}) {
     const {
+        data,
         width: defaultWidth,
+        imageWidth: initialImageWidth,
+        imageHeight: initialImageHeight,
         initialColor: defaultInitialColor,
         initialEdge: defaultInitialEdge,
         iterationCount: defaultIterationCount,
         sampleDistance: defaultSampleDistance,
     } = useSelector((state) => state.settings);
-    const [imageWidth, setImageWidth] = useState(0);
-    const [imageHeight, setImageHeight] = useState(0);
+    const [imageWidth, setImageWidth] = useState(initialImageWidth);
+    const [imageHeight, setImageHeight] = useState(initialImageHeight);
     const [tileWidthCount, setTileWidthCount] = useState(defaultWidth);
     const [initialColor, setInitialColor] = useState({
         nextIndex: defaultInitialColor.length,
@@ -27,7 +30,7 @@ export default function InputForm({onSubmit}) {
         edge: defaultInitialEdge.map((value, index) => ({[index]: value})).reduce((a, b) => Object.assign({}, a, b), {}),
         id: new Array(defaultInitialEdge.length).fill(0).map((value, index) => index),
     });
-    const [imageData, setImageData] = useState();
+    const [imageData, setImageData] = useState(data);
     const [iterationCount, setIterationCount] = useState(defaultIterationCount);
     const [sampleDistance, setSampleDistance] = useState(defaultSampleDistance);
     const canvasRef = useRef();
@@ -48,6 +51,7 @@ export default function InputForm({onSubmit}) {
                 const context = canvasRef.current.getContext('2d');
                 context.drawImage(image, 0, 0, image.width, image.height);
                 setImageData(context.getImageData(0, 0, image.width, image.height).data);
+                setSampleDistance(Math.ceil(Math.max(image.width, image.height) / 50));
             }
         };
     }, [canvasRef, setImageData, setImageWidth, setImageHeight]);
@@ -156,6 +160,13 @@ export default function InputForm({onSubmit}) {
         sampleDistance
     ]);
     
+    useEffect(() => {
+        if (imageData) {
+            const context = canvasRef.current.getContext('2d');
+            context.putImageData(new ImageData(imageData, imageWidth, imageHeight), 0, 0);
+        }
+    }, []);
+        
     return (
         <SquareContainer
             other={<form className="form normal-page-padding" onSubmit={handleSubmit}>
