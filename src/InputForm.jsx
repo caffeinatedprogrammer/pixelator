@@ -159,11 +159,13 @@ export default function InputForm({onSubmit}) {
     return (
         <SquareContainer
             other={<form className="form" onSubmit={handleSubmit}>
-                <h3>Instructions:</h3>
-                <span>Select an image with few colors and sufficiently wide margin.</span>
-                <span>Choose the main colors in the image.</span>
-                <span>Choose the color of the edge if necessary.</span>
-                <span>Increase sample distance if the calculation is too slow.</span>
+                <div className="normal-padding">
+                    <h3>Instructions:</h3>
+                    <p>Select an image with few colors and sufficiently wide margin.</p>
+                    <p>Choose the main colors in the image.</p>
+                    <p>Choose the color of the edge if necessary.</p>
+                    <p>Increase sample distance if the calculation is too slow.</p>
+                </div>
                 <SettingItem name="Image">
                     <input className="hidden" ref={fileInputRef} type="file" onChange={handleFileInputChange} />
                     <Button onClick={handleFileButtonClick}>Choose an image</Button>
@@ -220,9 +222,11 @@ export default function InputForm({onSubmit}) {
                         />
                     )}
                 </SettingItem>
-                <Button disabled={!imageData} type="submit">
-                    Submit
-                </Button>
+                <div className="normal-padding">
+                    <Button disabled={!imageData} type="submit">
+                        Submit
+                    </Button>
+                </div>
             </form>}
             square={
                 <div className="overflow-scroll full">

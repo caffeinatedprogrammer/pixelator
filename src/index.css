@@ -41,6 +41,10 @@ body, p, span, label, button, input {
     margin: 4px;
 }
 
+.normal-padding {
+    padding: 8px;
+}
+
 .flex-container {
     display: flex;
     align-items: center;
