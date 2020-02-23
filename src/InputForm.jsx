@@ -2,6 +2,7 @@ import React, { useCallback, useState, useRef } from "react";
 import "./InputPage.css";
 import Button from "./Button";
 import SquareContainer from "./SquareContainer";
+import SettingItem from "./SettingItem";
 import { useSelector } from './hooks';
 
 export default function InputForm({onSubmit}) {
@@ -134,34 +135,32 @@ export default function InputForm({onSubmit}) {
                 <span>Choose the main colors in the image.</span>
                 <span>Choose the color of the edge if necessary.</span>
                 <span>Increase sample distance if the calculation is too slow.</span>
-                <input className="hidden" ref={fileInputRef} type="file" onChange={handleFileInputChange} />
-                <Button onClick={handleFileButtonClick}>Choose an image</Button>
-                <div>
-                    <label>Width:</label>
+                <SettingItem name="Image">
+                    <input className="hidden" ref={fileInputRef} type="file" onChange={handleFileInputChange} />
+                    <Button onClick={handleFileButtonClick}>Choose an image</Button>
+                </SettingItem>
+                <SettingItem name="Tile width">
                     <input
                         type="number"
                         onChange={handleTileWidthCountChange}
                         value={tileWidthCount}
                     />
-                </div>
-                <div>
-                    <label>Iteration Count:</label>
+                </SettingItem>
+                <SettingItem name="Iteration Count">
                     <input
                         type="number"
                         onChange={handleIterationCountChange}
                         value={iterationCount}
                     />
-                </div>
-                <div>
-                    <label>Sample Distance:</label>
+                </SettingItem>
+                <SettingItem name="Sample Distance">
                     <input
                         type="number"
                         onChange={handleSampleDistanceChange}
                         value={sampleDistance}
                     />
-                </div>
-                <div>
-                    <Button onClick={handleAddColor}>Add color</Button>
+                </SettingItem>
+                <SettingItem name="Color" end={<Button onClick={handleAddColor}>+</Button>}>
                     {initialColor.id.map((_id) =>
                         <input
                             key={`color_${_id}`}
@@ -171,9 +170,8 @@ export default function InputForm({onSubmit}) {
                             onChange={handleColorChange}
                         />
                     )}
-                </div>
-                <div>
-                    <Button onClick={handleAddEdge}>Add Edge</Button>
+                </SettingItem>
+                <SettingItem name="Edge" end={<Button onClick={handleAddEdge}>+</Button>}>
                     {initialEdge.id.map((_id) =>
                         <input
                             key={`edge_${_id}`}
@@ -183,7 +181,7 @@ export default function InputForm({onSubmit}) {
                             onChange={handleEdgeChange}
                         />
                     )}
-                </div>
+                </SettingItem>
                 <Button disabled={!imageData} type="submit">
                     Submit
                 </Button>
