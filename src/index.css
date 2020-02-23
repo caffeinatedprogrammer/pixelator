@@ -28,9 +28,17 @@ body, p, span, label, button, input {
 }
 
 .button {
+    padding: 2px 4px;
     border: 1px solid black;
     background: white;
     border-radius: 3px;
+}
+
+.rounded {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    margin: 4px;
 }
 
 .flex-container {

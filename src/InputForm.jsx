@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useRef } from "react";
 import "./InputPage.css";
 import Button from "./Button";
+import RoundedButton from "./RoundedButton";
 import SquareContainer from "./SquareContainer";
 import SettingItem from "./SettingItem";
 import { useSelector } from './hooks';
@@ -190,8 +191,8 @@ export default function InputForm({onSubmit}) {
                 </SettingItem>
                 <SettingItem name="Color" end={
                     <>
-                        <Button onClick={handleAddColor}>+</Button>
-                        <Button onClick={handleRemoveColor}>-</Button>
+                        <RoundedButton onClick={handleAddColor}>+</RoundedButton>
+                        <RoundedButton onClick={handleRemoveColor}>-</RoundedButton>
                     </>
                 }>
                     {initialColor.id.map((_id) =>
@@ -204,7 +205,11 @@ export default function InputForm({onSubmit}) {
                         />
                     )}
                 </SettingItem>
-                <SettingItem name="Edge" end={<Button onClick={handleAddEdge}>+</Button>}>
+                <SettingItem name="Edge" end={
+                    <>
+                        <RoundedButton onClick={handleAddEdge}>+</RoundedButton>
+                        <RoundedButton onClick={handleRemoveEdge}>-</RoundedButton>
+                    </>}>
                     {initialEdge.id.map((_id) =>
                         <input
                             key={`edge_${_id}`}
