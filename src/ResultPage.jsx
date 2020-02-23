@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 import SquareContainer from './SquareContainer';
 import Button from './Button';
@@ -41,7 +41,7 @@ export default function ResultPage(props) {
             const clustered = await getResult(image, initialColor, iterationCount);
             setImageData(clustered);
         };
-        getImage();
+        data && getImage();
     }, [
         data,
         imageWidth,
@@ -66,7 +66,7 @@ export default function ResultPage(props) {
     }
     
     return (
-        <>
+        data ? 
             <SquareContainer
                 square={
                     <Result
@@ -82,6 +82,7 @@ export default function ResultPage(props) {
                     </div>
                 }
             />
-        </>
+        :
+            <Redirect to="/" />
     );
 }
