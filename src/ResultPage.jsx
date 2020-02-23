@@ -76,10 +76,10 @@ export default function ResultPage(props) {
                     />
                 }
                 other={
-                    <>
-                        <Button onClick={history.goBack}>Go Back</Button>
+                    <div className="normal-page-padding">
+                        <div className="dummy-height" />
                         <ResultGuide mapping={mapping} />
-                    </>
+                    </div>
                 }
             />
         </>

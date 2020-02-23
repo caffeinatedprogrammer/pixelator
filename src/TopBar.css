@@ -11,10 +11,6 @@
     padding: 16px;
 }
 
-.dummy-height {
-    height: 30px;
-}
-
 .title {
     flex: 0 0 auto;
     display: inline-block;

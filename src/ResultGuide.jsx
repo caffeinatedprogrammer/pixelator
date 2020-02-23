@@ -4,7 +4,7 @@ import "./ResultGuide.css";
 
 export default function ResultGuide({mapping}) {
     return (
-        <div className="result-guide-container">
+        <div className="result-guide-container normal-page-padding">
             {Object.keys(mapping).map((color) =>
                 <div
                     key={color.toString()}

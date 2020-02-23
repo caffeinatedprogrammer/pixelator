@@ -158,9 +158,10 @@ export default function InputForm({onSubmit}) {
     
     return (
         <SquareContainer
-            other={<form className="form" onSubmit={handleSubmit}>
+            other={<form className="form normal-page-padding" onSubmit={handleSubmit}>
+                <div className="dummy-height" />
+                <h1>Instructions</h1>
                 <div className="normal-padding">
-                    <h3>Instructions:</h3>
                     <p>Select an image with few colors and sufficiently wide margin.</p>
                     <p>Choose the main colors in the image.</p>
                     <p>Choose the color of the edge if necessary.</p>

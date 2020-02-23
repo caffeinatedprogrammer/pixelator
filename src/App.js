@@ -2,6 +2,7 @@ import React, { useReducer } from 'react';
 import TopBar from './TopBar';
 import InputPage from './InputPage';
 import ResultPage from './ResultPage';
+import AboutPage from './AboutPage';
 import './App.css';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -19,16 +20,20 @@ function App() {
         <AppContext.Provider value={state}>
             <DispatchContext.Provider value={dispatch}>
                 <BrowserRouter basename={process.env.PUBLIC_URL}>
-                    <TopBar />
-                    <div className="dummy-height" />
-                    <Switch>
-                        <Route exact={true} path="/result">
-                            <ResultPage />
-                        </Route>
-                        <Route exact={true} path="/">
-                            <InputPage />
-                        </Route>
-                    </Switch>
+                    <div className="container">
+                        <TopBar />
+                        <Switch>
+                            <Route exact={true} path="/result">
+                                <ResultPage />
+                            </Route>
+                            <Route exact={true} path="/about">
+                                <AboutPage />
+                            </Route>
+                            <Route exact={true} path="/">
+                                <InputPage />
+                            </Route>
+                        </Switch>
+                    </div>
                 </BrowserRouter>
             </DispatchContext.Provider>
         </AppContext.Provider>
