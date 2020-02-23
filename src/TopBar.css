@@ -1,0 +1,31 @@
+.top-bar {
+    position: fixed;
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    top: 0;
+    width: 100vw;
+    height: 30px;
+    z-index: 1;
+    background-color: white;
+    padding: 16px;
+}
+
+.dummy-height {
+    height: 30px;
+}
+
+.title {
+    flex: 0 0 auto;
+    display: inline-block;
+    font-size: 25px;
+    margin: 4px 16px;
+}
+
+.link {
+    flex: 0 0 auto;
+    display: inline-block;
+    color: black;
+    font-style: normal;
+    margin: 8px;
+}

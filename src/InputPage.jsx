@@ -44,7 +44,7 @@ export default function InputPage(props) {
     useTitle("Pixelator");
     
     return (
-        <div className="container">
+        <div className="container normal-page-padding">
             <InputForm onSubmit={onSubmit} />
         </div>
     );

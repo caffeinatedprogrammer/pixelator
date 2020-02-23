@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import TopBar from './TopBar';
 import InputPage from './InputPage';
 import ResultPage from './ResultPage';
 import './App.css';
@@ -18,6 +19,8 @@ function App() {
         <AppContext.Provider value={state}>
             <DispatchContext.Provider value={dispatch}>
                 <BrowserRouter basename={process.env.PUBLIC_URL}>
+                    <TopBar />
+                    <div className="dummy-height" />
                     <Switch>
                         <Route exact={true} path="/result">
                             <ResultPage />
