@@ -1,27 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import SquareContainer from './SquareContainer';
 import Button from './Button';
 import Result from './Result';
 import ResultGuide from './ResultGuide';
 import { getSimplifiedImage, getResult } from './util';
-import { useTitle } from "./hooks";
+import { useTitle, useSelector } from "./hooks";
 
 export default function ResultPage(props) {
-    const location = useLocation();
     const history = useHistory();
-    const state = location.state;
+    const convert = useCallback((initialColor) => {
+        return initialColor.map((color) => {
+            return [
+                parseInt(color.substr(1,2), 16),
+                parseInt(color.substr(3,2), 16),
+                parseInt(color.substr(5,2), 16),
+                255,
+            ];
+        });
+    }, []);
     const {
         data,
         imageWidth,
         imageHeight,
         width,
-        initialColor,
-        initialEdge,
+        initialColor: rawInitialColor,
+        initialEdge: rawInitialEdge,
         iterationCount,
         sampleDistance,
-    } = state;
+    } = useSelector((state) => state.settings);
+    const initialColor = useMemo(() => convert(rawInitialColor), [convert, rawInitialColor]);
+    const initialEdge = useMemo(() => convert(rawInitialEdge), [convert, rawInitialEdge]);
     const [imageData, setImageData] = useState();
     
     useTitle("Pixelator | Result");

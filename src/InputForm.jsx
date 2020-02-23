@@ -2,24 +2,32 @@ import React, { useCallback, useState, useRef } from "react";
 import "./InputPage.css";
 import Button from "./Button";
 import SquareContainer from "./SquareContainer";
+import { useSelector } from './hooks';
 
 export default function InputForm({onSubmit}) {
+    const {
+        width: defaultWidth,
+        initialColor: defaultInitialColor,
+        initialEdge: defaultInitialEdge,
+        iterationCount: defaultIterationCount,
+        sampleDistance: defaultSampleDistance,
+    } = useSelector((state) => state.settings);
     const [imageWidth, setImageWidth] = useState(0);
     const [imageHeight, setImageHeight] = useState(0);
-    const [tileWidthCount, setTileWidthCount] = useState(20);
+    const [tileWidthCount, setTileWidthCount] = useState(defaultWidth);
     const [initialColor, setInitialColor] = useState({
-        nextIndex: 5,
-        color: {1: '#000000', 2: '#FFFFFF', 3: '#FFFF00', 4: '#FF0000'},
-        id: [1, 2, 3, 4]
+        nextIndex: defaultInitialColor.length,
+        color: defaultInitialColor.map((value, index) => ({[index]: value})).reduce((a, b) => Object.assign({}, a, b), {}),
+        id: new Array(defaultInitialColor.length).fill(0).map((value, index) => index),
     });
     const [initialEdge, setInitialEdge] = useState({
-        nextIndex: 1,
-        edge: {},
-        id: []
+        nextIndex: defaultInitialEdge.length,
+        edge: defaultInitialEdge.map((value, index) => ({[index]: value})).reduce((a, b) => Object.assign({}, a, b), {}),
+        id: new Array(defaultInitialEdge.length).fill(0).map((value, index) => index),
     });
     const [imageData, setImageData] = useState();
-    const [iterationCount, setIterationCount] = useState(50);
-    const [sampleDistance, setSampleDistance] = useState(1);
+    const [iterationCount, setIterationCount] = useState(defaultIterationCount);
+    const [sampleDistance, setSampleDistance] = useState(defaultSampleDistance);
     const canvasRef = useRef();
     const fileInputRef = useRef();
     const handleFileButtonClick = useCallback((event) => {
@@ -60,7 +68,7 @@ export default function InputForm({onSubmit}) {
         event.preventDefault();
         setInitialColor((prev) => ({
             ...prev,
-            nextIndex: prev.nextIndex + 1,
+            nextIndex: prev.nextIndex,
             id: [...prev.id, prev.nextIndex],
             color: {...prev.color, [prev.nextIndex]: '#000000'},
         }));
@@ -81,7 +89,7 @@ export default function InputForm({onSubmit}) {
         event.preventDefault();
         setInitialEdge((prev) => ({
             ...prev,
-            nextIndex: prev.nextIndex + 1,
+            nextIndex: prev.nextIndex,
             id: [...prev.id, prev.nextIndex],
             edge: {...prev.edge, [prev.nextIndex]: '#000000'},
         }));
