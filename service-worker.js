@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/pixelator/precache-manifest.7738ed46b0eff8333eb6e81802d16ba2.js"
+  "/pixelator/precache-manifest.7b454bb4fac7f6816d3919bb2182c7ec.js"
 );
 
 self.addEventListener('message', (event) => {
