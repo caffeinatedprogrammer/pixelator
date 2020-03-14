@@ -24,7 +24,7 @@ export default function InputForm({onSubmit}) {
         nextIndex: defaultInitialColor.length,
         color: defaultInitialColor.map((value, index) => ({[index]: value})).reduce((a, b) => Object.assign({}, a, b), {}),
         id: new Array(defaultInitialColor.length).fill(0).map((value, index) => index),
-    });console.dir(initialColor);
+    });
     const [initialEdge, setInitialEdge] = useState({
         nextIndex: defaultInitialEdge.length,
         edge: defaultInitialEdge.map((value, index) => ({[index]: value})).reduce((a, b) => Object.assign({}, a, b), {}),
@@ -180,11 +180,12 @@ export default function InputForm({onSubmit}) {
                 </div>
                 <SettingItem name="Image">
                     <input className="hidden" ref={fileInputRef} type="file" onChange={handleFileInputChange} />
-                    <Button onClick={handleFileButtonClick}>Choose an image</Button>
+                    <Button aria-label="Choose an image" onClick={handleFileButtonClick}>Choose an image</Button>
                 </SettingItem>
                 <SettingItem name="Tile width">
                     <input
                         type="number"
+                        aria-label="Tile width"
                         onChange={handleTileWidthCountChange}
                         value={tileWidthCount}
                     />
@@ -192,6 +193,7 @@ export default function InputForm({onSubmit}) {
                 <SettingItem name="Iteration Count">
                     <input
                         type="number"
+                        aria-label="Iteration count"
                         onChange={handleIterationCountChange}
                         value={iterationCount}
                     />
@@ -199,14 +201,15 @@ export default function InputForm({onSubmit}) {
                 <SettingItem name="Sample Distance">
                     <input
                         type="number"
+                        aria-label="Sample distance"
                         onChange={handleSampleDistanceChange}
                         value={sampleDistance}
                     />
                 </SettingItem>
                 <SettingItem name="Color" end={
                     <>
-                        <RoundedButton onClick={handleAddColor}>+</RoundedButton>
-                        <RoundedButton onClick={handleRemoveColor}>-</RoundedButton>
+                        <RoundedButton aria-label="add" onClick={handleAddColor}>+</RoundedButton>
+                        <RoundedButton aria-label="remove" onClick={handleRemoveColor}>-</RoundedButton>
                     </>
                 }>
                     {initialColor.id.map((_id) =>
@@ -221,8 +224,8 @@ export default function InputForm({onSubmit}) {
                 </SettingItem>
                 <SettingItem name="Edge" end={
                     <>
-                        <RoundedButton onClick={handleAddEdge}>+</RoundedButton>
-                        <RoundedButton onClick={handleRemoveEdge}>-</RoundedButton>
+                        <RoundedButton aria-label="add" onClick={handleAddEdge}>+</RoundedButton>
+                        <RoundedButton aria-label="remove" onClick={handleRemoveEdge}>-</RoundedButton>
                     </>}>
                     {initialEdge.id.map((_id) =>
                         <input

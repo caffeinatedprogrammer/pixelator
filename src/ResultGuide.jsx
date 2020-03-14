@@ -7,6 +7,7 @@ export default function ResultGuide({mapping}) {
         <div className="result-guide-container normal-page-padding">
             {Object.keys(mapping).map((color) =>
                 <div
+                    id={color.toString()}
                     key={color.toString()}
                     className="result-guide-item"
                 >
@@ -19,7 +20,7 @@ export default function ResultGuide({mapping}) {
                         border: "1px solid black",
                         marginRight: "8px",
                     }}/>
-                    <p>{mapping[color]}</p>
+                    <label htmlFor={color.toString()}>{mapping[color]}</label>
                 </div>
             )}
         </div>
