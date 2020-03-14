@@ -16,7 +16,7 @@ export default function AboutPage() {
                     Pixelator is an "image discretizer" which generates Lennon Arts, written by CaffeinatedProgrammer.
                 </p>
                 <p>
-                    The source code is release under the MIT License.
+                    The <a className="source-code" href="https://github.com/caffeinatedprogrammer/pixelator" target="_blank">source code</a> is release under the MIT License.
                 </p>
                 <div className="license">
                     <p className="mono">
