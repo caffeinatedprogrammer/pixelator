@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Fira+Mono&display=swap');
 
 body {
     margin: 0px;
@@ -8,6 +9,11 @@ body, p, span, label, button, input {
     margin: 0px;
     padding: 0px;
     font-family: "Fira Sans";
+    font-size: 16px;
+}
+
+.mono {
+    font-family: "Fira Mono";
     font-size: 16px;
 }
 
