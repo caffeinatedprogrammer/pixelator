@@ -78,3 +78,7 @@ h1 {
 .flex-fixed {
     flex: 0 0 auto;
 }
+
+.normal-margin-left {
+    margin-left: 4px;
+}

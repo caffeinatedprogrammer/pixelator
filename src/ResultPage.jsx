@@ -63,6 +63,11 @@ export default function ResultPage(props) {
         }
     }
     
+    const [hasBorder, setHasBorder] = useState(false);
+    const handleBorderChange = useCallback((event) => {
+        setHasBorder(event.target.checked);
+    }, [setHasBorder]);
+    
     return (
         data ? 
             <SquareContainer
@@ -70,6 +75,7 @@ export default function ResultPage(props) {
                     <>
                         <div className="dummy-height" />
                         <Result
+                            hasBorder={hasBorder}
                             data={imageData}
                             width={width}
                             height={Math.floor(imageHeight/Math.floor(imageWidth/width))}
@@ -80,6 +86,10 @@ export default function ResultPage(props) {
                     <div className="normal-page-padding">
                         <div className="dummy-height" />
                         <ResultGuide mapping={mapping} />
+                        <div className="normal-page-padding">
+                            <label htmlFor="border-checkbox">Show border</label>
+                            <input id="border-checkbox" className="normal-margin-left" type="checkbox" checked={hasBorder} onChange={handleBorderChange} />
+                        </div>
                     </div>
                 }
             />
