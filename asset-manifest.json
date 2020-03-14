@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/pixelator/static/css/main.9133a0fb.chunk.css",
-    "main.js": "/pixelator/static/js/main.d376785c.chunk.js",
-    "main.js.map": "/pixelator/static/js/main.d376785c.chunk.js.map",
-    "runtime-main.js": "/pixelator/static/js/runtime-main.b0d9f35b.js",
-    "runtime-main.js.map": "/pixelator/static/js/runtime-main.b0d9f35b.js.map",
-    "static/js/2.223be466.chunk.js": "/pixelator/static/js/2.223be466.chunk.js",
-    "static/js/2.223be466.chunk.js.map": "/pixelator/static/js/2.223be466.chunk.js.map",
+    "main.js": "/pixelator/static/js/main.bb95fb2c.chunk.js",
+    "main.js.map": "/pixelator/static/js/main.bb95fb2c.chunk.js.map",
+    "runtime-main.js": "/pixelator/static/js/runtime-main.b7bc1cab.js",
+    "runtime-main.js.map": "/pixelator/static/js/runtime-main.b7bc1cab.js.map",
+    "static/js/2.43bdf541.chunk.js": "/pixelator/static/js/2.43bdf541.chunk.js",
+    "static/js/2.43bdf541.chunk.js.map": "/pixelator/static/js/2.43bdf541.chunk.js.map",
     "index.html": "/pixelator/index.html",
-    "precache-manifest.64b93b2b9dc91fecf361e6d095c212ea.js": "/pixelator/precache-manifest.64b93b2b9dc91fecf361e6d095c212ea.js",
+    "precache-manifest.798d0bfdced27f183f0c65c48b7ab1db.js": "/pixelator/precache-manifest.798d0bfdced27f183f0c65c48b7ab1db.js",
     "service-worker.js": "/pixelator/service-worker.js",
     "static/css/main.9133a0fb.chunk.css.map": "/pixelator/static/css/main.9133a0fb.chunk.css.map",
-    "static/js/2.223be466.chunk.js.LICENSE": "/pixelator/static/js/2.223be466.chunk.js.LICENSE"
+    "static/js/2.43bdf541.chunk.js.LICENSE.txt": "/pixelator/static/js/2.43bdf541.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.b0d9f35b.js",
-    "static/js/2.223be466.chunk.js",
+    "static/js/runtime-main.b7bc1cab.js",
+    "static/js/2.43bdf541.chunk.js",
     "static/css/main.9133a0fb.chunk.css",
-    "static/js/main.d376785c.chunk.js"
+    "static/js/main.bb95fb2c.chunk.js"
   ]
 }
