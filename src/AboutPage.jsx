@@ -13,10 +13,10 @@ export default function AboutPage() {
             <h1>About</h1>
             <div className="normal-padding">
                 <p>
-                    Pixelator is an "image discretizer" which generates Lennon Arts, written by CaffeinatedProgrammer.
+                    Pixelator is an "image discretizer" which generates Lennon Arts, written by Caffeinated Programmer.
                 </p>
                 <p>
-                    The <a className="source-code" href="https://github.com/caffeinatedprogrammer/pixelator" target="_blank">source code</a> is release under the MIT License.
+                    The <a className="source-code" href="https://github.com/caffeinatedprogrammer/pixelator" target="_blank" rel="noopener noreferrer">source code</a> is release under the MIT License.
                 </p>
                 <div className="license">
                     <p className="mono">
