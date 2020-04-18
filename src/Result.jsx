@@ -19,12 +19,10 @@ export default function Result(props) {
                 }}>
                     <div style={{
                         position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        border: hasBorder ? '2px solid white' : 'none',
-                        boxSizing: "border-box",
+                        top: hasBorder ? '7.5%' : '0px',
+                        left: hasBorder ? '7.5%' : '0px',
+                        right: hasBorder ? '7.5%' : '0px',
+                        bottom: hasBorder ? '7.5%' : '0px',
                         backgroundColor: `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]}, ${pixel[3]})`,
                     }} />
                 </div>
