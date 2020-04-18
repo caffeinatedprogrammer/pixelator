@@ -5,9 +5,14 @@ import { toRGB } from "./util";
 
 import { useHistory } from 'react-router-dom';
 
-export default function InputPage(props) {
+export default function InputPage({startNavigation}) {
     const history = useHistory();
     const saveSettings = useAction('save_settings');
+    const push = useCallback(() => {
+        history.push({
+            pathname: "/result",
+        });
+    }, [history]);
     const onSubmit = useCallback(
         (
             data,
@@ -36,10 +41,8 @@ export default function InputPage(props) {
             data[i+2] = convertedPixel[2];
             data[i+3] = convertedPixel[3];
         }
-        history.push({
-            pathname: "/result",
-        });
-    }, [history, saveSettings]);
+        startNavigation(push);
+    }, [startNavigation, push, saveSettings]);
     
     useTitle("Pixelator");
     
