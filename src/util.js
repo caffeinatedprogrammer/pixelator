@@ -86,8 +86,8 @@ export function getMedian(data, edges) {
 }
 
 export async function getSimplifiedImage(data, imageWidth, imageHeight, width, sampleDistance, initialEdge) {
-    const tileSize = Math.floor(imageWidth/width);
-    const height = Math.floor(imageHeight/tileSize);
+    const tileSize = Math.ceil(imageWidth/width);
+    const height = Math.ceil(imageHeight/tileSize);
     const newData = new Array(width*height);
     // truncate image at bottom
     for (var i=0; i<height; i++) {
