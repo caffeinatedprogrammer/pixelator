@@ -165,7 +165,7 @@ export default function InputForm({onSubmit}) {
             const context = canvasRef.current.getContext('2d');
             context.putImageData(new ImageData(imageData, imageWidth, imageHeight), 0, 0);
         }
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
         
     return (
         <SquareContainer
