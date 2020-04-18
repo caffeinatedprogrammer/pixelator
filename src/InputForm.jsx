@@ -180,7 +180,7 @@ export default function InputForm({onSubmit}) {
                 </div>
                 <SettingItem name="Image">
                     <input className="hidden" ref={fileInputRef} type="file" onChange={handleFileInputChange} />
-                    <Button aria-label="Choose an image" onClick={handleFileButtonClick}>Choose an image</Button>
+                    <Button aria-label="Choose" onClick={handleFileButtonClick}>Choose</Button>
                 </SettingItem>
                 <SettingItem name="Tile width">
                     <input
